@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/select.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+    <script src="/javascripts/select.js"></script>
+    <script src="/javascripts/script.js"></script>
+    <style>
+    body {
+        padding: 15px;
+    }
+    </style>
+</head>
+
+<body ng-controller="DemoCtrl">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="#">Disease Identification</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/users/register">Register</a></li>
+                    <li><a href="/users/login">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h4>Patient's Name:</h4>
+        <input type="text" ng-model="patientName" style="width: 500px" name="patientName">
+        <br>
+        <h4>Patient's Phone Number:</h4>
+        <input type="text" ng-model="patientPhone" name="patientNumber">
+    </div>
+    <h1 class="container">Select Basic Symptom</h1>
+    <br>
+    <br>
+    <div class="col-md-6">
+        <div class="container-fluid">
+            <!-- <p>Selected: {{tags.abc}}</p> -->
+            <ui-select ng-model="tags.abc" theme="bootstrap" style="width: 500px;">
+                <ui-select-match allow-clear placeholder="Enter First Symptom">{{$select.selected}}</ui-select-match>
+                <ui-select-choices repeat="item1 in tags.available | filter: $select.search" ng-click=spliceFromArray1()>{{item1}}</ui-select-choices>
+            </ui-select>
+            <br>
+            <br>
+        </div>
+        <div class="container-fluid">
+            <!-- <p>Selected: {{tags.def}}</p> -->
+            <ui-select ng-model="tags.def" theme="bootstrap" style="width: 500px;">
+                <ui-select-match allow-clear placeholder="Enter Third Symptom">{{$select.selected}}</ui-select-match>
+                <ui-select-choices repeat="item2 in tags.available | filter: $select.search" ng-click=spliceFromArray2()>{{item2}}</ui-select-choices>
+            </ui-select>
+            <br>
+            <br>
+        </div>
+        <br>
+    </div>
+    <div class="col-md-6">
+        <div class="container">
+            <!-- <p>Selected: {{tags.ghi}}</p> -->
+            <ui-select ng-model="tags.ghi" theme="bootstrap" style="width: 500px;">
+                <ui-select-match allow-clear placeholder="Enter Second Symptom">{{$select.selected}}</ui-select-match>
+                <ui-select-choices repeat="item3 in tags.available | filter: $select.search" ng-click=spliceFromArray3()>{{item3}}</ui-select-choices>
+            </ui-select>
+            <br>
+            <br>
+        </div>
+        <div class="container">
+            <!-- <p>Selected: {{tags.jkl}}</p> -->
+            <ui-select ng-model="tags.jkl" theme="bootstrap" style="width: 500px;">
+                <ui-select-match allow-clear placeholder="Enter Fourth Symptom">{{$select.selected}}</ui-select-match>
+                <ui-select-choices repeat="item4 in tags.available | filter: $select.search" ng-click=spliceFromArray4()>{{item4}}</ui-select-choices>
+            </ui-select>
+            <br>
+            <br>
+        </div>
+    </div>
+    <br>
+    <br>
+    <button class="btn btn-primary" type="submit" name="submit" ng-click="predictDisease()">Predict Disease</button>
+    <table class="table table-inverse">
+        <thead>
+            <tr>
+                <th>Disease</th>
+                <th>Chances(in %)</th>
+            </tr>
+        </thead>
+        <br>
+        <br>
+        <tbody>
+            <tr ng-repeat="x in prediction">
+                <td>{{x[0]}}</td>
+                <td>{{x[1]}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/javascripts/bootstrap.js"></script>
+</body>
+
+</html>
